@@ -6,9 +6,8 @@ workflows:
     scripts:
       - name: Extract Android project
         script: |
-          unzip -q SammridhiFinanceAndroid_V2_Codemagic.zip -d project
-          cd project
-          find . -maxdepth 2 -type f | head -50
+          ZIP=$(find . -maxdepth 1 -name '*.zip' | head -1)
+unzip -q "$ZIP" -d project
 
       - name: Build APK
         script: |
