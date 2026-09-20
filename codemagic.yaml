@@ -7,7 +7,7 @@ workflows:
       - name: Extract Android project
         script: |
           ZIP=$(find . -maxdepth 1 -name '*.zip' | head -1)
-unzip -q "$ZIP" -d project
+          unzip -q "$ZIP" -d project
 
       - name: Build APK
         script: |
