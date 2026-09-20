@@ -1,0 +1,24 @@
+workflows:
+  android-apk:
+    name: Sammridhi Finance APK
+    environment:
+      java: 17
+    scripts:
+      - name: Extract Android project
+        script: |
+          unzip -q SammridhiFinanceAndroid_V2_Codemagic.zip -d project
+          cd project
+          find . -maxdepth 2 -type f | head -50
+
+      - name: Build APK
+        script: |
+          cd project
+          if [ -f ./gradlew ]; then
+            chmod +x ./gradlew
+            ./gradlew assembleDebug
+          else
+            gradle assembleDebug
+          fi
+
+    artifacts:
+      - project/**/build/outputs/apk/debug/*.apk
