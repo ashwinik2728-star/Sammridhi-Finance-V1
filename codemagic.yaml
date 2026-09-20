@@ -12,12 +12,11 @@ workflows:
       - name: Build APK
         script: |
           cd project
-          if [ -f ./gradlew ]; then
-            chmod +x ./gradlew
-            ./gradlew assembleDebug
-          else
-            gradle assembleDebug
-          fi
+          ROOT=$(find . -name settings.gradle.kts -o -name settings.gradle | head -1)
+          ROOT=$(dirname "$ROOT")
+          cd "$ROOT"
+          chmod +x ./gradlew
+          ./gradlew assembleDebug
 
     artifacts:
       - project/**/build/outputs/apk/debug/*.apk
